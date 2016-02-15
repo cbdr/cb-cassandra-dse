@@ -8,7 +8,7 @@
 #
 
 
-include_recipe "cassandra-dse::default"
+include_recipe "cassandra-dse"
 
 directory 'home/ec2-user/.aws' do
   mode '0775'

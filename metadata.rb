@@ -1,9 +1,9 @@
 name 'cb-cassandra-dse'
-maintainer 'Chef Software, Inc.'
-maintainer_email 'cookbooks@chef.io'
+maintainer 'Careerbuilder.com'
+maintainer_email 'joshua.smith@careerbuilder.com'
 license 'Apache 2.0'
-description 'Reference cookbook to show managing Django python app on OpsWorks'
+description 'Wrapper cookbook to manage Careerbuilder Cassandra nodes on AWS through Opsworks'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '0.2.0'
+version '0.3.1'
 
 depends 'cassandra-dse'

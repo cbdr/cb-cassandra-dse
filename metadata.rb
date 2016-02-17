@@ -8,5 +8,3 @@ version '0.4.0'
 
 depends 'cassandra-dse'
 depends 'aws', '>= 0.2.4'
-
-provides 'aws-tag::ec2'

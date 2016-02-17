@@ -7,3 +7,6 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.4.0'
 
 depends 'cassandra-dse'
+depends 'aws', '>= 0.2.4'
+
+provides 'aws-tag::ec2'

@@ -1,4 +1,4 @@
-include_recipe "aws"
+include_recipe 'aws'
 include_recipe 'cassandra-dse::default'
 
 directory 'home/ec2-user/.aws' do

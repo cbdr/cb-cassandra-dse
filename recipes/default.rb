@@ -15,9 +15,9 @@ template '/home/ec2-user/.aws/config' do
   action :create
 end
 
-#unless node['aws-tag']['tags'].empty? || node['aws-tag']['tags'].nil?
-#    aws_resource_tag node['ec2']['instance_id'] do
-#        tags(node['aws-tag']['tags'])
-#        action :update
-#    end
-#end
+unless node['aws-tag']['tags'].empty? || node['aws-tag']['tags'].nil?
+    aws_resource_tag node['ec2']['instance_id'] do
+        tags(node['aws-tag']['tags'])
+        action :update
+    endunco
+end

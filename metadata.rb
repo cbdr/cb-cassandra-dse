@@ -10,3 +10,4 @@ depends 'cassandra-dse'
 depends 'aws'
 depends 'ntp'
 
+provides 'cb-cassandra-dse::default'

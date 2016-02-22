@@ -18,7 +18,7 @@ end
 node['aws-tags']['tags'].each do |key, value|
 	execute 'add_tags' do
 		command 'aws ec2 create-tags --resources $(curl http://169.254.169.254/latest/meta-data/instance-id) --tags Key=#{key},Value=#{value}'
-		action: run
+		action :run
 	end
 end
 

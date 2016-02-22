@@ -2,11 +2,12 @@ include_recipe 'aws'
 include_recipe 'cassandra-dse::default'
 include_recipe 'ntp::default'
 
-directory 'home/ec2-user/.aws' do
-  mode '0775'
-  action :create
+['root','ec2-user'].each do |u|
+	directory 'home/#{u}/.aws' do
+	  mode '0775'
+	  action :create
+	end
 end
-
 template '/home/ec2-user/.aws/config' do
   source 'config.erb'
   owner 'ec2-user'

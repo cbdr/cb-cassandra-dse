@@ -7,13 +7,13 @@ include_recipe 'ntp::default'
 	  mode '0775'
 	  action :create
 	end
-end
-template '/home/ec2-user/.aws/config' do
-  source 'config.erb'
-  owner 'ec2-user'
-  group 'ec2-user'  
-  mode '0600'
-  action :create
+	template '/home/#{u}/.aws/config' do
+	  source 'config.erb'
+	  owner '#{u}'
+	  group '#{u}'  
+	  mode '0600'
+	  action :create
+	end
 end
 
 node['aws-tag']['tags'].each do |key,value|

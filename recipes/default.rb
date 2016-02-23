@@ -3,14 +3,14 @@ include_recipe 'cassandra-dse::default'
 include_recipe 'ntp::default'
 
 ['root','ec2-user'].each do |u|
-	directory 'home/#{u}/.aws' do
+	directory "home/#{u}/.aws" do
 	  mode '0775'
 	  action :create
 	end
-	template '/home/#{u}/.aws/config' do
+	template "/home/#{u}/.aws/config" do
 	  source 'config.erb'
-	  owner '#{u}'
-	  group '#{u}'  
+	  owner "#{u}"
+	  group "#{u}"  
 	  mode '0600'
 	  action :create
 	end

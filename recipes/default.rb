@@ -14,6 +14,17 @@ include_recipe 'ntp::default'
 	  action :create
 	end
 
+	directory '/root/.aws' do
+	  mode '0775'
+	  action :create
+	end
+	template '/root/.aws/config' do
+	  source 'config.erb'
+	  owner 'root'
+	  group 'root'  
+	  mode '0600'
+	  action :create
+	end
 node['aws-tag']['tags'].each do |key,value|
 	execute 'add_tags' do
 		command "aws ec2 create-tags --resources $(curl http://169.254.169.254/latest/meta-data/instance-id) --tags Key=#{key},Value=#{value}"

@@ -2,19 +2,17 @@ include_recipe 'aws'
 include_recipe 'cassandra-dse::default'
 include_recipe 'ntp::default'
 
-['root','ec2-user'].each do |u|
-	directory "home/#{u}/.aws" do
+	directory '/home/ec2-user/.aws' do
 	  mode '0775'
 	  action :create
 	end
-	template "/home/#{u}/.aws/config" do
+	template '/home/ec2-user/.aws/config' do
 	  source 'config.erb'
-	  owner "#{u}"
-	  group "#{u}"  
+	  owner 'ec2-user'
+	  group 'ec2-user'  
 	  mode '0600'
 	  action :create
 	end
-end
 
 node['aws-tag']['tags'].each do |key,value|
 	execute 'add_tags' do

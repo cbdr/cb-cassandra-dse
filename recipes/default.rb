@@ -67,7 +67,7 @@ execute 'unzip cloud watch monitoring scripts' do
     not_if { ::File.exists?("#{node['cw_mon']['home_dir']}/aws-scripts-mon")}
 end
 
-file '#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip' do
+file "#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip" do
   action :delete    
   not_if { ::File.exists?("#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip")== false }
 end

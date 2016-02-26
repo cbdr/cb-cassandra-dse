@@ -51,7 +51,7 @@ yum_package 'perl-Digest-SHA' do
   action :install
 end
 
-remote_file "#{node['cw_mon'][:home_dir]}/CloudWatchMonitoringScripts-#{node['cw_mon'][:version]}.zip" do
+remote_file "#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip" do
   source "#{node['cw_mon']['release_url']}"
   owner "#{node['cw_mon']['user']}"
   group "#{node['cw_mon']['group']}"

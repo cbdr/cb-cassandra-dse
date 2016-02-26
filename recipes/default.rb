@@ -51,31 +51,31 @@ yum_package 'perl-Digest-SHA' do
   action :install
 end
 
-remote_file "#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip" do
-  source "#{node['cw_mon']['release_url']}"
-  owner "#{node['cw_mon']['user']}"
-  group "#{node['cw_mon']['group']}"
+remote_file "#{node['cloudwatch_monitor']['home_dir']}/CloudWatchMonitoringScripts-#{node['cloudwatch_monitor']['version']}.zip" do
+  source "#{node['cloudwatch_monitor']['release_url']}"
+  owner "#{node['cloudwatch_monitor']['user']}"
+  group "#{node['cloudwatch_monitor']['group']}"
   mode 0755 
-  not_if { ::File.exists?("#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip")}
+  not_if { ::File.exists?("#{node['cloudwatch_monitor']['home_dir']}/CloudWatchMonitoringScripts-#{node['cloudwatch_monitor']['version']}.zip")}
 end
 
 execute 'unzip cloud watch monitoring scripts' do
-    command "unzip #{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip"
-    cwd "#{node['cw_mon']['home_dir']}"
-    user "#{node['cw_mon']['user']}"
-	group "#{node['cw_mon']['group']}"
-    not_if { ::File.exists?("#{node['cw_mon']['home_dir']}/aws-scripts-mon")}
+    command "unzip #{node['cloudwatch_monitor']['home_dir']}/CloudWatchMonitoringScripts-#{node['cloudwatch_monitor']['version']}.zip"
+    cwd "#{node['cloudwatch_monitor']['home_dir']}"
+    user "#{node['cloudwatch_monitor']['user']}"
+	group "#{node['cloudwatch_monitor']['group']}"
+    not_if { ::File.exists?("#{node['cloudwatch_monitor']['home_dir']}/aws-scripts-mon")}
 end
 
-file "#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip" do
+file "#{node['cloudwatch_monitor']['home_dir']}/CloudWatchMonitoringScripts-#{node['cloudwatch_monitor']['version']}.zip" do
   action :delete    
-  not_if { ::File.exists?("#{node['cw_mon']['home_dir']}/CloudWatchMonitoringScripts-#{node['cw_mon']['version']}.zip")== false }
+  not_if { ::File.exists?("#{node['cloudwatch_monitor']['home_dir']}/CloudWatchMonitoringScripts-#{node['cloudwatch_monitor']['version']}.zip")== false }
 end
 
 cron 'cloudwatch_schedule_metrics' do
   action :create 
   minute '*/5'
-  user "#{node['cw_mon']['user']}"
-  home "#{node['cw_mon']['home_dir']}/aws-scripts-mon"
-  command "#{node['cw_mon']['home_dir']}/aws-scripts-mon/mon-put-instance-data.pl --mem-util --disk-space-util --disk-path=/var/lib/cassandra --from-cron"
+  user "#{node['cloudwatch_monitor']['user']}"
+  home "#{node['cloudwatch_monitor']['home_dir']}/aws-scripts-mon"
+  command "#{node['cloudwatch_monitor']['home_dir']}/aws-scripts-mon/mon-put-instance-data.pl --mem-util --disk-space-util --disk-path=/var/lib/cassandra --from-cron"
 end

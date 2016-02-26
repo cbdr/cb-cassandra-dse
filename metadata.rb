@@ -7,4 +7,11 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.4.1'
 
 depends 'cassandra-dse'
+<<<<<<< HEAD
 depends 'aws', '= 2.5.0'
+=======
+depends 'aws'
+depends 'ntp'
+
+provides 'cb-cassandra-dse::default'
+>>>>>>> origin/master

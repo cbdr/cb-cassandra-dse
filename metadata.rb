@@ -6,7 +6,7 @@ description 'Wrapper cookbook to manage Careerbuilder Cassandra nodes on AWS thr
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.4.1'
 
-depends 'cassandra-dse'
+depends 'cassandra-dse', '~> 4.2.0'
 depends 'aws'
 depends 'ntp'
 depends 'yum'

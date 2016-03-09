@@ -5,29 +5,31 @@ include_recipe 'yum'
 include_recipe 'zip'
 include_recipe 'snmp'
 
-	directory '/home/ec2-user/.aws' do
-	  mode '0775'
-	  action :create
-	end
-	template '/home/ec2-user/.aws/config' do
-	  source 'config.erb'
-	  owner 'ec2-user'
-	  group 'ec2-user'  
-	  mode '0600'
-	  action :create
-	end
+directory '/home/ec2-user/.aws' do
+  mode '0775'
+  action :create
+end
 
-	directory '/root/.aws' do
-	  mode '0775'
-	  action :create
-	end
-	template '/root/.aws/config' do
-	  source 'config.erb'
-	  owner 'root'
-	  group 'root'  
-	  mode '0600'
-	  action :create
-	end
+template '/home/ec2-user/.aws/config' do
+  source 'config.erb'
+  owner 'ec2-user'
+  group 'ec2-user'  
+  mode '0600'
+  action :create
+end
+
+directory '/root/.aws' do
+  mode '0775'
+  action :create
+end
+
+template '/root/.aws/config' do
+  source 'config.erb'
+  owner 'root'
+  group 'root'  
+  mode '0600'
+  action :create
+end
 	
 node['aws-tag']['tags'].each do |key,value|
 	execute 'add_tags' do
@@ -80,6 +82,10 @@ cron 'cloudwatch_schedule_metrics' do
   home "#{node['cloudwatch_monitor']['home_dir']}/aws-scripts-mon"
   command "#{node['cloudwatch_monitor']['home_dir']}/aws-scripts-mon/mon-put-instance-data.pl --mem-util --disk-space-util --disk-path=/var/lib/cassandra --from-cron"
 end
+
+r = resources(template: '/etc/snmp/snmpd.conf')
+r.cookbook('cb-cassandra-dse')
+r.source('snmpd.conf.erb')
 
 if node['automated_testing'][''] == 'true'
 	

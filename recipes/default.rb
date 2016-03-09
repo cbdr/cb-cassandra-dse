@@ -88,7 +88,7 @@ r.cookbook('cb-cassandra-dse')
 r.source('snmpd.conf.erb')
 
 if node['automated_testing'] == 'true'
-	file '/etc/cassandra/cpnf/testing.sh' do
+	file '/etc/cassandra/conf/testing.sh' do
 		owner 'ec2-user'
 		group 'ec2-user'
 		content "#!/bin/bash

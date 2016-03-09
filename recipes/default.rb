@@ -3,6 +3,7 @@ include_recipe 'cassandra-dse::default'
 include_recipe 'ntp::default'
 include_recipe 'yum'
 include_recipe 'zip'
+include_recipe 'snmp'
 
 	directory '/home/ec2-user/.aws' do
 	  mode '0775'
@@ -78,4 +79,8 @@ cron 'cloudwatch_schedule_metrics' do
   user "#{node['cloudwatch_monitor']['user']}"
   home "#{node['cloudwatch_monitor']['home_dir']}/aws-scripts-mon"
   command "#{node['cloudwatch_monitor']['home_dir']}/aws-scripts-mon/mon-put-instance-data.pl --mem-util --disk-space-util --disk-path=/var/lib/cassandra --from-cron"
+end
+
+if node['automated_testing'][''] == 'true'
+	
 end

@@ -11,5 +11,6 @@ depends 'aws'
 depends 'ntp'
 depends 'yum'
 depends 'zip'
+depends 'snmp'
 
 provides 'cb-cassandra-dse::default'

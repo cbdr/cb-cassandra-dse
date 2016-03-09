@@ -87,7 +87,7 @@ r = resources(template: '/etc/snmp/snmpd.conf')
 r.cookbook('cb-cassandra-dse')
 r.source('snmpd.conf.erb')
 
-if node['automated_testing']['scripts'] == 'true'
+if node['automated_testing'] == 'true'
 	bash 'testing_script' do
 		user 'ec2-user'
 		group 'ec2-user'

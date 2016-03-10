@@ -92,6 +92,7 @@ if node['automated_testing'] == 'true'
 		owner 'ec2-user'
 		group 'ec2-user'
 		content "#!/bin/bash
+		if [ $(hostname) == 'testcass1' ]; then
 			nodes=( $(nodetool status | grep 'UN' | awk '{print $2}') )
 			echo \"$nodes[@]\"
 			errorcount=0
@@ -106,7 +107,8 @@ if node['automated_testing'] == 'true'
 			fi
 			if [ \"$errorcount\" -eq 0 ]; then
 					aws ses send-email --from \"automatedtest@cbsitedb.net\" --destination ToAddresses=\"sitedbcloud@careerbuilder.com\" --subject \"Cassandra automated testing\" --text \"Everything is AWESOME!  Contact josh.smith@careerbuilder.com or johnny.thomas@careerbuilder.com for help or information.\"
-			fi"
+			fi
+		fi "
 		mode '0777'
 	end
 	

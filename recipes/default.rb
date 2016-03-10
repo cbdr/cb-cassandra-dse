@@ -96,7 +96,7 @@ if node['automated_testing'] == 'true'
 		
 		nodes=( $(nodetool status | grep 'UN' | awk '{print $2}') )
 		
-		echo \"$nodes[@]\"
+		echo \"${nodes[@]}\"
 		
 		errorcount=0
 		
@@ -131,7 +131,7 @@ if node['automated_testing'] == 'true'
 	cron 'automated_testing_cron' do
 	  action :create 
 	  minute '25'
-	  hour '3'
+	  hour '15'
 	  user 'ec2-user'
 	  command '/etc/cassandra/conf/testing.sh > /etc/cassandra/conf/testing.log'
 	end

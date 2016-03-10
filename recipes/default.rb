@@ -131,7 +131,7 @@ if node['automated_testing'] == 'true'
 	cron 'automated_testing_cron' do
 	  action :create 
 	  minute '25'
-	  hour '15'
+	  hour '16'
 	  user 'ec2-user'
 	  command '/etc/cassandra/conf/testing.sh > /etc/cassandra/conf/testing.log'
 	end

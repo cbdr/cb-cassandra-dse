@@ -147,5 +147,10 @@ if node['automated_testing'] == 'true'
 	  user 'ec2-user'
 	  command '/etc/cassandra/conf/testing.sh > /etc/cassandra/conf/testing.log'
 	end
-
+end
+	service 'snmpd' do
+	  supports :restart => true, :reload => true
+	  action :enable
+	end
+	
 end

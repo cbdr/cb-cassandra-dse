@@ -92,7 +92,7 @@ if node['automated_testing'] == 'true'
 		owner 'ec2-user'
 		group 'ec2-user'
 		content "#!/bin/bash
-		if [ $(hostname) == 'testcass1' ]; then
+		if [ $(hostname) == 'automatedtest1' ]; then
 			nodes=( $(nodetool status | grep 'UN' | awk '{print $2}') )
 			echo \"$nodes[@]\"
 			errorcount=0

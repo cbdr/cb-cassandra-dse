@@ -108,7 +108,7 @@ if node['automated_testing'] == 'true'
 		
 		fi
 		
-		snmpwalk -v2c -c public 127.0.0.1 .1.3.6.1.4.1
+		snmpwalk -Os -c public -v 2c 127.0.0.1 iso.3.6.1.2.1.1.1
 		
 		if [ \"$?\" -ne \"0\" ]; then
 				

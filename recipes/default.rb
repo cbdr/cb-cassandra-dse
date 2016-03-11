@@ -89,8 +89,8 @@ r.source('snmpd.conf.erb')
 
 if node['automated_testing'] == 'true'
 	file '/etc/cassandra/conf/testing.sh' do
-		owner 'ec2-user'
-		group 'ec2-user'
+		owner 'root'
+		group 'root'
 		content "#!/bin/bash
 	if [ $(hostname) == 'automatedtest1' ]; then
 		touch /etc/cassandra/conf/testing.log

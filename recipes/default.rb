@@ -93,10 +93,17 @@ if node['automated_testing'] == 'true'
 		group 'ec2-user'
 		content "#!/bin/bash
 	if [ $(hostname) == 'automatedtest1' ]; then
+		touch /etc/cassandra/conf/testing.log
+		
+		outfile=/etc/cassandra/conf/testing.log
+		
+		echo \"Time Started:\"  >> $outfile
+		
+		date >> $outfile
 		
 		nodes=( $(nodetool status | grep 'UN' | awk '{print $2}') )
 		
-		echo \"${nodes[@]}\"
+		echo \"${nodes[@]}\" >> $outfile
 		
 		errorcount=0
 		
@@ -106,9 +113,10 @@ if node['automated_testing'] == 'true'
 		
 				aws ses send-email --from \"automatedtest@cbsitedb.net\" --destination ToAddresses=\"sitedbcloud@careerbuilder.com,logicmonitorsitedb@careerbuildersitedb.pagerduty.com\" --subject \"Cassandra automated testing: Cassandra Failure\" --text \"There is a problem with the Cassandra Opsworks automated tests. One or more nodes has not joined the ring correctly. Please SSH into one of the following nodes 172.21.11.162, 172.21.12.84, or 172.21.13.47.  Contact josh.smith@careerbuilder.com or johnny.thomas@careerbuilder.com for help or information.\"
 		
+				echo \"Sent node email\" >> $outfile
 		fi
 		
-		snmpwalk -Os -c public -v 2c 127.0.0.1 iso.3.6.1.2.1.1.1
+		snmpwalk -Os -c public -v 2c 127.0.0.1 iso.3.6.1.2.1.1.1 >> $outfile
 		
 		if [ \"$?\" -ne \"0\" ]; then
 				
@@ -116,9 +124,11 @@ if node['automated_testing'] == 'true'
 		
 				aws ses send-email --from \"automatedtest@cbsitedb.net\" --destination ToAddresses=\"sitedbcloud@careerbuilder.com,logicmonitorsitedb@careerbuildersitedb.pagerduty.com\" --subject \"Cassandra automated testing: SNMP Failure\" --text \"There is a problem with the Cassandra Opsworks automated tests. SNMP did not get setup correctly. Please SSH into one of the following nodes 172.21.11.162, 172.21.12.84, or 172.21.13.47.  Contact josh.smith@careerbuilder.com or johnny.thomas@careerbuilder.com for help or information.\"
 		
+						echo \"Sent snmp email\" >> $outfile
+
 		fi
 
-		ntp=( $(ntpq -p | awk '{print $5}' | grep -Eo '[0-9]') )
+		ntp=( $(ntpq -p | awk '{print $5}' | grep -Eo '[0-9]') ) 
 		
 		if [ ${#ntp[@]} -eq 0 ]; then
 				
@@ -126,6 +136,8 @@ if node['automated_testing'] == 'true'
 				
 				aws ses send-email --from \"automatedtest@cbsitedb.net\" --destination ToAddresses=\"sitedbcloud@careerbuilder.com,logicmonitorsitedb@careerbuildersitedb.pagerduty.com\" --subject \"Cassandra automated testing: NTP Failure\" --text \"There is a problem with the Cassandra Opsworks automated tests. NTP is not synching correctly. Please SSH into one of the following nodes 172.21.11.162, 172.21.12.84, or 172.21.13.47.  Contact josh.smith@careerbuilder.com or johnny.thomas@careerbuilder.com for help or information.\"
 		
+						echo \"Sent ntp email\" >> $outfile
+
 		fi
 		
 		
@@ -133,8 +145,13 @@ if node['automated_testing'] == 'true'
 		if [ \"$errorcount\" -eq 0 ]; then
 				
 				aws ses send-email --from \"automatedtest@cbsitedb.net\" --destination ToAddresses=\"sitedbcloud@careerbuilder.com\" --subject \"Cassandra automated testing\" --text \"Everything is AWESOME!  Contact josh.smith@careerbuilder.com or johnny.thomas@careerbuilder.com for help or information.\"
-		
+						echo \"Sent all clear email\" >> $outfile
+
 		fi
+		
+		echo \"Time Ended:\"  >> $outfile
+		
+		date >> $outfile
 	
 	fi "
 		mode '0777'

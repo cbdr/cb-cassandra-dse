@@ -128,9 +128,9 @@ if node['automated_testing'] == 'true'
 
 		fi
 
-		ntp=( $(ntpq -p | awk '{print $5}' | grep -Eo '[0-9]') ) 
+		ntpstat 
 		
-		if [ ${#ntp[@]} -eq 0 ]; then
+		if [ \"$?\" -ne \"0\" ]; then
 				
 				((errorcount+=1))
 				

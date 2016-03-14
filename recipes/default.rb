@@ -4,7 +4,16 @@ include_recipe 'ntp::default'
 include_recipe 'yum'
 include_recipe 'zip'
 include_recipe 'snmp'
+package 'curl'
+package 'sudo'
+package 'bash'
 
+execute 'agent_install' do
+  command "curl --silent --show-error --header 'x-connect-key: 23ac4593ef138f4ce9e4ab5601fac505ea371c13' 'https://kickstart.jumpcloud.com/Kickstart' | sudo bash"
+path [ '/sbin', '/bin', '/usr/sbin', '/usr/bin' ]
+timeout 600
+creates '/opt/jc'
+end
 directory '/home/ec2-user/.aws' do
   mode '0775'
   action :create

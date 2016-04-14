@@ -97,6 +97,16 @@ r.cookbook('cb-cassandra-dse')
 r.source('snmpd.conf.erb')
 
 if node['automated_testing'] == 'true'
+	service 'cassandra' do
+	  	action :stop
+	end
+
+	file '/var/log/cassandra/system.log' do
+		action :delete
+	end
+	service 'cassandra' do
+	  	action :start
+	end
 	file '/etc/cassandra/conf/testing.sh' do
 		owner 'root'
 		group 'root'

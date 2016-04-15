@@ -126,18 +126,23 @@ yum_package 'scalyr-agent-2' do
   action :install
 end
 
+bash 'install_scalyr_agent' do
+  user 'root'
+  cwd '/root'
+  code <<-EOH
+  sudo scalyr-agent-2-config --set-key "0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-
+  scalyr-agent-2 start
+  EOH
+end
+
 if node['automated_testing'] == 'true'
-	
-	service 'cassandra' do
-	  	action :stop
-	end
 
 	file '/var/log/cassandra/system.log' do
 		action :delete
 	end
 	
 	service 'cassandra' do
-	  	action :start
+	  	action :restart
 	end
 	
 	file '/etc/cassandra/conf/testing.sh' do

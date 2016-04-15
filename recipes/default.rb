@@ -96,7 +96,38 @@ r = resources(template: '/etc/snmp/snmpd.conf')
 r.cookbook('cb-cassandra-dse')
 r.source('snmpd.conf.erb')
 
+remote_file '/usr/share/cassandra/lib/metrics-graphite-2.2.0.jar' do
+  source 'http://central.maven.org/maven2/com/yammer/metrics/metrics-graphite/2.2.0/metrics-graphite-2.2.0.jar'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
+
+remote_file '/root/scalyr-repo-bootstrap-1.2.1-1.noarch.rpm' do
+  source 'https://www.scalyr.com/scalyr-repo/stable/latest/scalyr-repo-bootstrap-1.2.1-1.noarch.rpm'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
+
+yum_package 'scalyr-repo-bootstrap-1.2.1-1.noarch.rpm' do
+  source '/root/scalyr-repo-bootstrap-1.2.1-1.noarch.rpm'
+  options 'nogpgcheck'
+  action :install
+end
+
+yum_package 'scalyr-repo' do
+  action :install
+end
+
+yum_package 'scalyr-agent-2' do
+  action :install
+end
+
 if node['automated_testing'] == 'true'
+	
 	service 'cassandra' do
 	  	action :stop
 	end
@@ -104,9 +135,11 @@ if node['automated_testing'] == 'true'
 	file '/var/log/cassandra/system.log' do
 		action :delete
 	end
+	
 	service 'cassandra' do
 	  	action :start
 	end
+	
 	file '/etc/cassandra/conf/testing.sh' do
 		owner 'root'
 		group 'root'

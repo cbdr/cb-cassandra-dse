@@ -125,7 +125,7 @@ yum_package 'scalyr-agent-2' do
   action :install
 end
 
-bash 'install_scalyr_agent' do
+script 'install_scalyr_agent' do
   user 'root'
   cwd '/root'
   code <<-EOH

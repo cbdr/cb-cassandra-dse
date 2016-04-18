@@ -129,7 +129,7 @@ script 'install_scalyr_agent' do
   user 'root'
   cwd '/root'
   code <<-EOH
-  sudo scalyr-agent-2-config --set-key "0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI- && sudo scalyr-agent-2 start
+  sudo scalyr-agent-2-config --set-key "0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-" && sudo scalyr-agent-2 start
   EOH
 end
 

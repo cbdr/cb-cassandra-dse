@@ -114,7 +114,6 @@ end
 
 yum_package 'scalyr-repo-bootstrap-1.2.1-1.noarch.rpm' do
   source '/root/scalyr-repo-bootstrap-1.2.1-1.noarch.rpm'
-  options 'nogpgcheck'
   action :install
 end
 

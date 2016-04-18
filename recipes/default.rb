@@ -126,7 +126,8 @@ yum_package 'scalyr-agent-2' do
 end
 
 execute 'install_scalyr_agent' do
-  command 'sudo /root/scalyr-agent-2-config --set-key "0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-" && sudo /root/scalyr-agent-2 start'
+  cwd '/root'
+  command 'sudo scalyr-agent-2-config --set-key "0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-" && sudo scalyr-agent-2 start'
   creates '/var/application/.upgraded'
   action :run
 end

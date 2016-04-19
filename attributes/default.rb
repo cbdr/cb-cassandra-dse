@@ -8,3 +8,4 @@ default['cloudwatch_monitor']['release_url']       = 'http://aws-cloudwatch.s3.a
 default['aws-tags']['tags']['Team'] = 'ReplaceMe'
 default['aws-tags']['tags']['Ring'] = 'ReplaceMe'
 default['automated_testing'] = 'false'
+default['scalyr']['key'] = '0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-'

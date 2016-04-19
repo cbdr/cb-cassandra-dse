@@ -132,6 +132,14 @@ execute 'install_scalyr_agent' do
   action :run
 end
 
+template '/etc/scalyr-agent-2/agent.json' do
+  source 'agent.json.erb'
+  owner 'root'
+  group 'root'  
+  mode '0666'
+  action :create
+end
+
 if node['automated_testing'] == 'true'
 
 	file '/var/log/cassandra/system.log' do

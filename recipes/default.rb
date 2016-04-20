@@ -127,7 +127,7 @@ end
 
 execute 'install_scalyr_agent' do
   cwd '/root'
-  command 'sudo scalyr-agent-2-config --set-key #{node['scalyr']['key']} && sudo scalyr-agent-2 start'
+  command 'sudo scalyr-agent-2-config --set-key "0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-" && sudo scalyr-agent-2 start'
   creates '/var/application/.upgraded'
   action :run
 end

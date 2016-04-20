@@ -140,6 +140,10 @@ template '/etc/scalyr-agent-2/agent.json' do
   action :create
 end
 
+service 'cassandra' do
+  	action :restart
+end
+	
 if node['automated_testing'] == 'true'
 
 	file '/var/log/cassandra/system.log' do

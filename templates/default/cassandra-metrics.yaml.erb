@@ -1,7 +1,7 @@
 graphite:
   -
     period: 60
-    prefix: 'cassandra-cluster-prefix.node['hostname']'
+    prefix: 'cassandra-cluster-prefix.<%= node['hostname'] %>'
     timeunit: 'SECONDS'
     hosts:
      - host: 'localhost'

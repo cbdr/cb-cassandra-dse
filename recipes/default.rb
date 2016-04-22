@@ -140,6 +140,14 @@ template '/etc/scalyr-agent-2/agent.json' do
   action :create
 end
 
+template '/etc/cassandra/conf/cassandra-metrics.yaml' do
+  source 'cassandra-metrics.yaml.erb'
+  owner 'root'
+  group 'root'  
+  mode '0666'
+  action :create
+end
+
 service 'cassandra' do
   	action :restart
 end

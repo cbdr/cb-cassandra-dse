@@ -140,13 +140,9 @@ template '/etc/scalyr-agent-2/agent.json' do
   action :create
 end
 
-template '/etc/cassandra/conf/cassandra-metrics.yaml' do
-  source 'cassandra-metrics.yaml.erb'
-  owner 'cassandra'
-  group 'cassandra'  
-  mode '0666'
-  action :create
-end
+r = resources(template: '/etc/cassandra/conf/cassandra-metrics.yaml')
+r.cookbook('cb-cassandra-dse')
+r.source('cassandra-metrics.yaml.erb')
 
 service 'cassandra' do
   	action :restart

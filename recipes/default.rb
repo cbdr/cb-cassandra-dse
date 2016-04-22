@@ -142,8 +142,8 @@ end
 
 template '/etc/cassandra/conf/cassandra-metrics.yaml' do
   source 'cassandra-metrics.yaml.erb'
-  owner 'root'
-  group 'root'  
+  owner 'cassandra'
+  group 'cassandra'  
   mode '0666'
   action :create
 end

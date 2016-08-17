@@ -10,3 +10,4 @@ default['aws-tags']['tags']['Ring'] = 'ReplaceMe'
 default['automated_testing'] = 'false'
 default['scalyr']['key'] = '0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-'
 override['cassandra']['local_jmx'] = false
+#This is a comment

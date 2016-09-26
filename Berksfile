@@ -2,7 +2,7 @@ source 'https://supermarket.chef.io'
 
 metadata
 
-cookbook 'cassandra-dse',
+cookbook 'cassandra-dse', '= 4.1.0'
 cookbook 'aws', '= 3.3.3'
 cookbook 'yum', '= 3.11.0'
 cookbook 'zip', '= 1.1.0'

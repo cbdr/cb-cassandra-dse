@@ -12,7 +12,8 @@ depends 'ntp'
 depends 'yum'
 depends 'zip'
 depends 'snmp'
-#depends 'al_agents'
+depends 'al_agents'
 
 provides 'cb-cassandra-dse::default'
+provides 'al_agents::default'
 #Comment

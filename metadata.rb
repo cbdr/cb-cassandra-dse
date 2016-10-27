@@ -15,5 +15,5 @@ depends 'snmp'
 #depends 'al_agents'
 
 provides 'cb-cassandra-dse::default'
-provides 'al_agents::default'
+#provides 'al_agents::default'
 #Comment

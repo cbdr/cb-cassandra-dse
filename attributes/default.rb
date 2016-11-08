@@ -10,5 +10,5 @@ default['aws-tags']['tags']['Ring'] = 'ReplaceMe'
 default['automated_testing'] = 'false'
 default['scalyr']['key'] = '0tWblZ3N8JLMSLGzNIZtbf5BhAVZAtp_/8mT02VvVrrI-'
 default['al_agents']['agent']['registration_key'] =    '5c778343b61cfecf542700aa385f99c30123b32057c0fe17c8'
-override['cassandra']['local_jmx'] = false
+#override['cassandra']['local_jmx'] = false
 #This is a comment

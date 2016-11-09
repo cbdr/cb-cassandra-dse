@@ -4,7 +4,7 @@ include_recipe 'ntp::default'
 include_recipe 'yum'
 include_recipe 'zip'
 include_recipe 'snmp'
-include_recipe 'al_agents::default'
+#include_recipe 'al_agents::default'
 package 'curl'
 package 'sudo'
 package 'bash'
@@ -240,4 +240,30 @@ end
 	  supports :restart => true, :reload => true
 	  action :enable
 	end
-	
+	packages:
+ - git-core
+
+write_files:
+ - content: |
+    {
+        "al_agents": {
+            "agent": {
+                "registration_key": "your_registration_key_here",
+                "proxy_url": nil
+            }
+        },
+        "run_list": "recipe[al_agents::default]"
+    }
+   path: /etc/chef/node.json
+   permissions: '0600'
+ - content: |
+    cookbook_path  "/tmp/cookbooks/"
+    log_level      :info
+    solo           true
+   path: /etc/chef/solo.rb
+
+runcmd:
+ - curl -L https://www.opscode.com/chef/install.sh | bash
+ - mkdir -p /tmp/cookbooks/
+ - git clone --depth 1 https://github.com/alertlogic/al_agents.git /tmp/cookbooks/al_agents/
+ - chef-solo -c /etc/chef/solo.rb -j /etc/chef/node.json

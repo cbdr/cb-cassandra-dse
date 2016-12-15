@@ -10,7 +10,7 @@ package 'sudo'
 package 'bash'
 
 execute 'agent_install' do
-  command "curl --silent --show-error --header 'x-connect-key: 23ac4593ef138f4ce9e4ab5601fac505ea371c13' 'https://kickstart.jumpcloud.com/Kickstart' | sudo bash"
+  command "curl --silent --show-error --header 'x-connect-key: 23ac4593ef138f4ce9e4ab5601fac505ea371c13' 'https://kickstart.jumpcloud.com/Kickstart'"
 path [ '/sbin', '/bin', '/usr/sbin', '/usr/bin' ]
 timeout 600
 creates '/opt/jc'

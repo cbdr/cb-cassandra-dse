@@ -215,7 +215,7 @@ if node['automated_testing'] == 'true'
 		
 		if [ \"$errorcount\" -eq 0 ]; then
 				
-				aws ses send-email --from \"automatedtest@cbsitedb.net\" --destination ToAddresses=\"sitedbcloud@careerbuilder.com\" --subject \"Cassandra automated testing\" --text \"Everything is AWESOME!  Contact johnny.thomas@careerbuilder.com for help or information.\"
+				aws ses send-email --from \"automatedtest@cbsitedb.net\" --destination ToAddresses=\"johnny.thomas@careerbuilder.com\" --subject \"Cassandra automated testing\" --text \"Everything is AWESOME!  Contact johnny.thomas@careerbuilder.com for help or information.\"
 						echo \"Sent all clear email\" >> $outfile
 
 		fi
